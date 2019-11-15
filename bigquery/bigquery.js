@@ -34,7 +34,7 @@ module.exports = function (RED) {
         }
         node.on("input", function (msg) {
             node.status({ fill: "blue", shape: "dot", text: "gcp.status.querying" });
-            bigquery.query(node.query, function (err, rows) {
+            bigquery.query(msg.query || node.query, function (err, rows) {
                 if (err) {
                     node.error("gcp.error.query-failed: " + JSON.stringify(err));
                 }
